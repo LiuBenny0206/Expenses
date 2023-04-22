@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bolder">{{ form.name.label }}</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group col-md-4">
+            <label style="font-weight: bolder ">{{ form.price.label }}</label>
+            {{ form.price }}
+        </div>
+        <div class ="form-group col-md-2">
+            <input class="btn btn-success" style="margin-top: 30px;" type="submit" value="Save" />
+        </div>
+    </div>
+</form>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Cost item</th>
+                <th>Amount</th>
+                <th>Setting</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.name }}</td>
+                    <td>{{ expense.price }}</td>
+                    <td>
+                        <a href="{% url 'Update' expense.id %}" class="btn btn-info">Update</a>
+                        <a href="{% url 'Delete' expense.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock  %}
